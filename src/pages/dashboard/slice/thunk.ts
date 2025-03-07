@@ -84,7 +84,7 @@ export const updateTicket = createAsyncThunk(
     const token = localStorage.getItem("token");
 
     try {
-      const response = await axios.post(
+      const response = await axios.put(
         `${API_URL}/ticket/update/${id}`,
         {
           status,

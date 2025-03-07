@@ -7,7 +7,9 @@ const ProtectedRoute = () => {
     (state: RootState) => state.userReducer
   );
 
-  if (!isAuthenticated) {
+  const token = localStorage.getItem("token");
+  console.log("-----t", token);
+  if (!token) {
     return <Navigate to="/login" replace />;
   }
 

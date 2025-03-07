@@ -9,12 +9,11 @@ import TicketDetail from "./ticketDetail";
 function AdminDashboard() {
   const { tickets } = useSelector((state: RootState) => state.ticketReducer);
   const dispatch = useDispatch<AppDispatch>();
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getTickets());
-  }, []);
-
-  const [isOpen, setIsOpen] = useState(false);
+  }, [isOpen]);
 
   const [id, setId] = useState("");
 
@@ -64,7 +63,12 @@ function AdminDashboard() {
           setIsOpen(false);
         }}
       >
-        <TicketDetail id={id} />
+        <TicketDetail
+          id={id}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+        />
       </Modal>
     </div>
   );

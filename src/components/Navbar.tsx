@@ -12,7 +12,7 @@ function Navbar({ onClick }: Props) {
   );
 
   return (
-    <div className=" flex justify-between items-center bg-background rounded-sm px-5 py-3">
+    <div className=" flex justify-between items-center bg-background px-5 py-3">
       <div className="ml-3 rounded-full bg-white p-2 text-2xl ">
         {name.charAt(0).toUpperCase() + name.charAt(1).toLowerCase()}
       </div>
