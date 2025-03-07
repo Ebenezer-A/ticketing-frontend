@@ -2,12 +2,14 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { Plus } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 type Props = {
   onClick: () => void;
 };
 
 function Navbar({ onClick }: Props) {
+  const navigate = useNavigate();
   const { name, role } = useSelector(
     (state: RootState) => state.userReducer.user
   );
@@ -28,7 +30,7 @@ function Navbar({ onClick }: Props) {
             <button
               onClick={() => {
                 localStorage.clear();
-                window.location.reload();
+                navigate("/login");
               }}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
             >
