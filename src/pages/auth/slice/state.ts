@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { userLogin, userSignup } from "./thunk";
 
+const storedUser = localStorage.getItem("user");
+const storedToken = localStorage.getItem("token");
+
 export interface User {
   id: string;
   name: string;
@@ -16,13 +19,10 @@ export interface AuthState {
 
 const initialState: AuthState = {
   isLoading: false,
-  user: {
-    id: "",
-    name: "",
-    email: "",
-    role: "",
-  },
-  isAuthenticated: false,
+  user: storedUser
+    ? JSON.parse(storedUser)
+    : { id: "", name: "", email: "", role: "" },
+  isAuthenticated: storedToken ? true : false,
 };
 
 export const authSlice = createSlice({
@@ -38,6 +38,8 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.user = action.payload;
         state.isAuthenticated = true;
+
+        localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(userLogin.rejected, (state) => {
         state.isLoading = false;
